@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster"
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
@@ -56,6 +57,7 @@ export default function RootLayout({
                             </div>
                         </footer>
                     </main>
+                    <Toaster />
                 </ThemeProvider>
             </body>
         </html>

@@ -1,6 +1,7 @@
 // @ts-nocheck
 "use client"
 import React from 'react';
+import { useToast } from "@/hooks/use-toast"
 import { Upload, Shield, AlertTriangle, Check, X } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
@@ -13,6 +14,7 @@ import { createClient } from '@/utils/supabase/client';
 
 export default function UploadPage() {
     const [file, setFile] = React.useState(null);
+    const { toast } = useToast()
     const [uploading, setUploading] = React.useState(false);
     const [progress, setProgress] = React.useState(0);
     const [uploadStatus, setUploadStatus] = React.useState('');
@@ -36,7 +38,18 @@ export default function UploadPage() {
 
     const handleUpload = async () => {
         if (!file) return;
+        const supabase = createClient();
+        const { data, error } = await supabase
+            .from("images")
+            .select("*")
 
+        if (data?.length > 5) {
+            toast({
+                title: "Limit reached",
+                description: "try contacting Developer👽",
+            })
+            return 0;
+        }
         try {
             setUploading(true);
             setProgress(0);
