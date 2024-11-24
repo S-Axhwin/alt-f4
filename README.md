@@ -176,13 +176,32 @@ bun run build
 2. Get your project URL and anon key from the project settings
 3. Add them to your environment variables
 
-## Team
+## Our Team
 
-- Ashwin - Full Stack Developer
-- Yugha - Frontend Developer
-- Udit - UI/UX Developer
-- Arshia - System Design
+Our diverse team brings together expertise in full-stack development, UI/UX design, and system architecture to deliver a robust image moderation solution.
 
+| Profile | Role & Responsibilities | Technical Focus | Key Contributions |
+|---------|------------------------|-----------------|-------------------|
+| **Ashwin** <br> Full Stack Developer <br> Team Lead | • Project Leadership <br> • Full Stack Development <br> • System Integration <br> • DevOps Management | • Next.js/React <br> • AWS Services <br> • Supabase <br> • API Development | • AWS Rekognition Integration <br> • Authentication System <br> • Database Architecture <br> • Backend Services |
+| **Yugha** <br> Frontend Developer | • UI Implementation <br> • Frontend Architecture <br> • Performance Optimization <br> • State Management | • React/Next.js <br> • Tailwind CSS <br> • Framer Motion <br> • TypeScript | • Responsive Design <br> • Real-time Updates <br> • UI Components <br> • Performance Tuning |
+| **Udit** <br> UI/UX Developer | • User Experience Design <br> • Interface Design <br> • Visual Systems <br> • Interaction Design | • UI/UX Design <br> • Design Systems <br> • User Research <br> • Prototyping | • User Workflows <br> • Design Language <br> • Interface Guidelines <br> • User Testing |
+| **Arshia** <br> System Design | • System Architecture <br> • Scalability Planning <br> • Infrastructure Design <br> • Technical Documentation | • AWS Architecture <br> • System Design <br> • Performance <br> • Documentation | • System Architecture <br> • Scalability Solutions <br> • Infrastructure Setup <br> • Technical Specs |
+
+### Development Philosophy
+
+| Principle | Description |
+|-----------|-------------|
+| **Agile Development** | Iterative approach with continuous feedback and improvements |
+| **User-Centric** | Focus on creating intuitive and efficient moderation workflows |
+| **Robust Architecture** | Building scalable and reliable systems for long-term success |
+| **Security First** | Implementing best practices for content and data security |
+
+### Connect With Us
+
+| Platform | Link |
+|----------|------|
+| GitHub | [Project Repository](http://github.com/S-Axhwin) |
+| LinkedIn | [Ashwin](https://www.linkedin.com/in/ashwinsathiya/) |
 ## License
 
 [Your chosen license]
