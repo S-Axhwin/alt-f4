@@ -6,6 +6,7 @@ import { Activity, Upload, Settings, Clock } from "lucide-react";
 
 import { useEffect, useState } from 'react';
 import { createClient } from "@/utils/supabase/client";
+import Link from "next/link";
 
 const WelcomePage = () => {
     const supabase = createClient();
@@ -23,7 +24,7 @@ const WelcomePage = () => {
     const userName = user?.user_metadata?.full_name?.split(' ')[0] || user?.email?.split('@')[0] || 'there';
 
     const quickActions = [
-        { title: 'Upload Files', icon: Upload, href: '/upload' },
+        { title: 'Upload Files', icon: Upload, href: '/protected/upload' },
         { title: 'Recent Activity', icon: Activity, href: '/activity' },
         { title: 'Settings', icon: Settings, href: '/settings' },
     ];
@@ -55,9 +56,11 @@ const WelcomePage = () => {
                                 <Icon className="w-4 h-4 ml-auto text-muted-foreground" />
                             </CardHeader>
                             <CardContent>
-                                <Button variant="ghost" className="p-0 h-auto">
-                                    Get Started →
-                                </Button>
+
+                                    <Button variant="ghost" className="p-0 h-auto">
+                                        Get Started →
+                                    </Button>
+                                
                             </CardContent>
                         </Card>
                     );

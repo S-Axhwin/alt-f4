@@ -1,23 +1,41 @@
+// @ts-nocheck
 "use client"
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { Home, Info, Menu, Settings, Upload } from "lucide-react";
+import { Home, Info, LogIn, LogOut, Menu, Settings, Upload, User } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createClient as createClientComponentClient } from "@/utils/supabase/client";
+import { useRouter } from 'next/navigation';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-const navigationItems = [
+// Navigation items for authenticated users
+const authenticatedItems = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Upload', href: '/protected/upload', icon: Upload },
     { name: 'About', href: '/about', icon: Info },
 ];
 
+// Navigation items for non-authenticated users
+const publicItems = [
+    { name: 'Home', href: '/', icon: Home },
+    { name: 'About', href: '/about', icon: Info },
+];
 
+function NavItems({ className, isAuthenticated }: { className?: string, isAuthenticated: boolean }) {
+    const items = isAuthenticated ? authenticatedItems : publicItems;
 
-function NavItems({ className }: { className?: string }) {
     return (
         <div className={cn("flex gap-4", className)}>
-            {navigationItems.map((item) => {
+            {items.map((item) => {
                 const IconComponent = item.icon;
                 return (
                     <Link
@@ -25,7 +43,7 @@ function NavItems({ className }: { className?: string }) {
                         href={item.href}
                         className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary"
                     >
-                        {/* <IconComponent className="h-4 w-4" /> */}
+                        <IconComponent className="h-4 w-4" />
                         <span>{item.name}</span>
                     </Link>
                 );
@@ -34,21 +52,122 @@ function NavItems({ className }: { className?: string }) {
     );
 }
 
+const UserMenu = () => {
+    const router = useRouter();
+    const supabase = createClientComponentClient();
+    const [userEmail, setUserEmail] = useState<string | null>(null);
+
+    useEffect(() => {
+        const getUserEmail = async () => {
+            const { data: { user }, error } = await supabase.auth.getUser();
+            if (user) {
+                setUserEmail(user.email);
+            }
+        };
+        getUserEmail();
+    }, [supabase.auth]);
+
+    const handleSignOut = async () => {
+        const { error } = await supabase.auth.signOut();
+        if (!error) {
+            router.refresh();
+            router.push('/');
+        }
+    };
+
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                    <User className="h-5 w-5" />
+                    <span className="sr-only">User menu</span>
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <DropdownMenuLabel>
+                    <div className="flex flex-col space-y-1">
+                        <p className="text-sm font-medium leading-none">My Account</p>
+                        <p className="text-xs leading-none text-muted-foreground">
+                            {userEmail}
+                        </p>
+                    </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                    <Link href="/protected/settings" className="flex items-center">
+                        <Settings className="mr-2 h-4 w-4" />
+                        <span>Settings</span>
+                    </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleSignOut}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Sign out</span>
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
+};
+
+const AuthButtons = () => {
+    return (
+        <div className="flex items-center gap-4">
+            <Button variant="ghost" asChild>
+                <Link href="/sign-in" className="flex items-center">
+                    <LogIn className="mr-2 h-4 w-4" />
+                    Sign In
+                </Link>
+            </Button>
+            <Button asChild>
+                <Link href="/sign-in">
+                    Sign Up
+                </Link>
+            </Button>
+        </div>
+    );
+};
+
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const supabase = createClientComponentClient();
+    const router = useRouter();
+
+    useEffect(() => {
+        const checkUser = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            setIsAuthenticated(!!user);
+        };
+
+        // Check initial auth state
+        checkUser();
+
+        // Listen for auth changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            setIsAuthenticated(!!session);
+        });
+
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, [supabase.auth]);
 
     return (
         <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container flex h-14 items-center">
                 <div className="mr-4 flex items-center space-x-2">
                     <Link href="/" className="flex items-center space-x-2">
-                        <span className="font-bold">Your App</span>
+                        <span className="font-bold text-xl">Alt F4</span>
                     </Link>
                 </div>
 
                 {/* Desktop Navigation */}
-                <div className="hidden md:flex md:flex-1 justify-end">
-                    <NavItems className="mx-6" />
+                <div className="hidden md:flex md:flex-1 md:justify-between md:items-center">
+                    <NavItems className="mx-6" isAuthenticated={isAuthenticated} />
+                    {isAuthenticated ? (
+                        <UserMenu />
+                    ) : (
+                        <AuthButtons />
+                    )}
                 </div>
 
                 {/* Mobile Navigation */}
@@ -65,7 +184,42 @@ const Navbar = () => {
                                 <SheetTitle>Navigation Menu</SheetTitle>
                             </SheetHeader>
                             <div className="flex flex-col space-y-4 mt-4">
-                                <NavItems className="flex-col items-start" />
+                                <NavItems className="flex-col items-start" isAuthenticated={isAuthenticated} />
+                                {isAuthenticated ? (
+                                    <div className="flex flex-col space-y-2">
+                                        <Link
+                                            href="/protected/settings"
+                                            className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary"
+                                        >
+                                            <Settings className="h-4 w-4" />
+                                            <span>Settings</span>
+                                        </Link>
+                                        <Button
+                                            variant="ghost"
+                                            onClick={async () => {
+                                                await supabase.auth.signOut();
+                                                router.refresh();
+                                                router.push('/');
+                                            }}
+                                            className="justify-start"
+                                        >
+                                            <LogOut className="mr-2 h-4 w-4" />
+                                            Sign out
+                                        </Button>
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-col space-y-2">
+                                        <Button variant="ghost" asChild>
+                                            <Link href="/login" className="flex items-center">
+                                                <LogIn className="mr-2 h-4 w-4" />
+                                                Sign In
+                                            </Link>
+                                        </Button>
+                                        <Button asChild>
+                                            <Link href="/register">Sign Up</Link>
+                                        </Button>
+                                    </div>
+                                )}
                             </div>
                         </SheetContent>
                     </Sheet>

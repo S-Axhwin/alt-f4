@@ -37,7 +37,7 @@ const s3Client = new S3Client({
 });
 
 const rekognitionClient = new RekognitionClient({
-    region: process.env.AWS_REGION || "us-east-1",
+    region: process.env.AWS_REGION1 || "us-east-1",
     credentials: {
         accessKeyId: process.env.AWS_ACCESS_KEY1!,
         secretAccessKey: process.env.AWS_SECRET_KEY1!
@@ -59,7 +59,7 @@ export async function getPresignedUrl(filename: string): Promise<PresignedUrlRes
     try {
         const key = generateUniqueFileKey(filename);
         const command = new PutObjectCommand({
-            Bucket: process.env.S3_BUCKET_NAME!,
+            Bucket: process.env.S3_BUCKET_NAME1!,
             Key: key,
             ContentType: `image/${filename.split('.').pop()}`,
         });
@@ -84,7 +84,7 @@ export async function getViewPresignedUrl(key: string): Promise<PresignedUrlResp
 
     try {
         const command = new GetObjectCommand({
-            Bucket: process.env.S3_BUCKET_NAME!,
+            Bucket: process.env.S3_BUCKET_NAME1!,
             Key: key,
         });
 
@@ -110,7 +110,7 @@ export async function checkModeration(key: string): Promise<ModerationResponse> 
         const command = new DetectModerationLabelsCommand({
             Image: {
                 S3Object: {
-                    Bucket: process.env.S3_BUCKET_NAME!,
+                    Bucket: process.env.S3_BUCKET_NAME1!,
                     Name: key
                 }
             },

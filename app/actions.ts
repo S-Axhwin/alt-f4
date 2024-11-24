@@ -2,7 +2,7 @@
 
 import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const signUpAction = async (formData: FormData) => {
@@ -39,23 +39,9 @@ export const signUpAction = async (formData: FormData) => {
     }
 };
 
-export const signInAction = async (formData: FormData) => {
+export async function signInWithGoogle() {
 
-    const supabase = await createClient();
-    const origin = (await headers()).get("origin");
-    const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-            redirectTo: `${origin}/auth/callback`,
-        }
-    });
-
-    if (error) {
-        return encodedRedirect("error", "/sign-in", error.message);
-    }
-
-    return redirect("/protected");
-};
+}
 
 export const forgotPasswordAction = async (formData: FormData) => {
     const email = formData.get("email")?.toString();
