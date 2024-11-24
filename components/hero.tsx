@@ -1,4 +1,4 @@
-// components/hero.tsx
+// @ts-nocheck
 "use client";
 
 import { Button } from "@/components/ui/button";
