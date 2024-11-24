@@ -44,7 +44,7 @@ export default function RootLayout({
                     <main className="min-h-screen flex flex-col">
                         <Navbar />
                         <div className="flex-1">
-                            <div className="container py-6">
+                            <div className="">
                                 {children}
                             </div>
                         </div>
