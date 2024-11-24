@@ -16,6 +16,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { revalidatePath } from "next/cache";
 
 // Navigation items for authenticated users
 const authenticatedItems = [
@@ -199,6 +200,7 @@ const Navbar = () => {
                                             onClick={async () => {
                                                 await supabase.auth.signOut();
                                                 router.refresh();
+                                                revalidatePath("/protected")
                                                 router.push('/');
                                             }}
                                             className="justify-start"
