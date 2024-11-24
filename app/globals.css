@@ -4,46 +4,26 @@
 
 @layer base {
     :root {
-      /* Light Theme */
-      --background: 0 0% 100%;          /* White */
-      --foreground: 220 13% 10%;        /* Almost black */
-      --card: 0 0% 98%;                 /* Slightly off-white */
-      --card-foreground: 220 13% 10%;
-      --popover: 0 0% 100%;
-      --popover-foreground: 220 13% 10%;
-
-      /* Discord Blurple */
-      --primary: 235 86% 65%;           /* #5865F2 */
-      --primary-foreground: 0 0% 100%;
-
-      /* Light gray for secondary */
-      --secondary: 220 13% 95%;         /* #E3E5E8 */
-      --secondary-foreground: 220 13% 10%;
-
-      /* Muted colors */
-      --muted: 220 13% 95%;            /* Discord's light muted */
-      --muted-foreground: 220 9% 46%;
-
-      /* Accent/Interactive elements */
-      --accent: 235 86% 65%;           /* Same as primary for consistency */
-      --accent-foreground: 0 0% 100%;
-
-      /* Danger/Destructive */
-      --destructive: 359 87% 59%;      /* Discord's danger red */
-      --destructive-foreground: 0 0% 100%;
-
-      /* Borders and inputs */
-      --border: 220 13% 91%;
-      --input: 220 13% 91%;
-      --ring: 235 86% 65%;
-      --radius: 0.9rem;                /* Discord uses smaller radius */
-
-      /* Chart colors based on Discord's palette */
-      --chart-1: 235 86% 65%;          /* Blurple */
-      --chart-2: 235 86% 65%;          /* Lighter Blurple */
-      --chart-3: 359 87% 59%;          /* Red */
-      --chart-4: 120 63% 42%;          /* Green */
-      --chart-5: 47 93% 67%;           /* Yellow */
+        --background: 224 71.4% 4.1%;      /* Github dark bg */
+        --foreground: 210 20% 98%;         /* Github text color */
+        --card: 224 71.4% 4.1%;            /* Card bg matching Github dark */
+        --card-foreground: 210 20% 98%;
+        --popover: 224 71.4% 4.1%;
+        --popover-foreground: 210 20% 98%;
+        --primary: 132 59% 33%;            /* Github primary color */
+        --primary-foreground: 220.9 39.3% 11%;
+        --secondary: 215 27.9% 16.9%;      /* Github secondary dark */
+        --secondary-foreground: 210 20% 98%;
+        --muted: 215 27.9% 16.9%;          /* Github muted elements */
+        --muted-foreground: 217.9 10.6% 64.9%;
+        --accent: 215 27.9% 16.9%;         /* Github accent color */
+        --accent-foreground: 210 20% 98%;
+        --destructive: 0 84.2% 60.2%;      /* Github error red */
+        --destructive-foreground: 210 20% 98%;
+        --border: 215 27.9% 16.9%;         /* Github border color */
+        --input: 215 27.9% 16.9%;
+        --ring: 216 34% 17%;
+        --radius: 0.7rem;
     }
 
     .dark {
@@ -85,7 +65,8 @@
       --chart-2: 235 86% 65%;      /* Lighter Blurple */
       --chart-3: 359 87% 59%;      /* Red */
       --chart-4: 120 63% 42%;      /* Green */
-      --chart-5: 47 93% 67%;       /* Yellow */
+      --chart-5: 47 93% 67%;
+      --radius: 0.9rem;     /* Yellow */
     }
   }
   @layer base {

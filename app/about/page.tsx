@@ -2,7 +2,8 @@
 "use client"
 
 import React from 'react';
-import { Shield, Code, Layout, Database, Zap, Github, Linkedin, Mail, LinkedinIcon, } from 'lucide-react';
+import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { Shield, Code, Layout, Database, Zap, Github, Linkedin, Mail, LinkedinIcon, X, } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -101,15 +102,20 @@ const techStack = [
 // Social links data
 const socialLinks = [
     {
-        icon: <Github className="h-5 w-5" />,
+        icon: <FaGithub />,
         href: "http://github.com/S-Axhwin",
         label: "GitHub"
     },
     {
-        icon: <Linkedin className="h-5 w-5" />,
+        icon: <FaLinkedin />,
         href: "https://www.linkedin.com/in/ashwinsathiya/",
         label: "LinkedIn"
     },
+    {
+        icon: <FaXTwitter />,
+        href: "https://x.com/sathiya_ashwin",
+        label: "x.com"
+    }
 ];
 
 export default function AboutPage() {
@@ -155,13 +161,13 @@ export default function AboutPage() {
 
             {/* Mission Section */}
             <motion.div
-                className="container py-12"
+                className="container py-8 md:px-28"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
             >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-pretty">
                     <MotionCard
                         className="bg-card"
                         variants={itemVariants}
@@ -219,14 +225,14 @@ export default function AboutPage() {
                     {teamMembers.map((member, index) => (
                         <MotionCard
                             key={index}
-                            className="bg-card"
+                            className="bg-card/50 backdrop-blur-sm border border-border/50"
                             variants={itemVariants}
                             whileHover={{
                                 scale: 1.05,
                                 transition: { type: "spring", stiffness: 300 }
                             }}
                         >
-                            <CardHeader>
+                            <CardHeader className="bg-background/50 border-b border-border/10">
                                 <motion.div
                                     className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4"
                                     whileHover={{ rotate: 360 }}
@@ -236,25 +242,31 @@ export default function AboutPage() {
                                         className: "w-6 h-6 text-primary"
                                     })}
                                 </motion.div>
-                                <CardTitle className="flex items-center gap-2">
+                                <CardTitle className="flex items-center gap-2 text-xl font-semibold text-foreground">
                                     {member.name}
                                     <Link href={member.linkedInUrl}>
                                         <LinkedinIcon
                                             size={20}
-                                            className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors duration-200"
+                                            className="text-muted-foreground hover:text-blue-600 cursor-pointer transition-colors duration-200"
                                         />
                                     </Link>
                                 </CardTitle>
-                                <CardDescription className='flex '>{member.role} </CardDescription>
+                                <CardDescription className="text-sm font-medium text-muted-foreground/80">
+                                    {member.role}
+                                </CardDescription>
                             </CardHeader>
-                            <CardContent>
-                                <p className="text-sm text-card-foreground mb-4">
+                            <CardContent className="pt-6 bg-card">
+                                <p className="text-sm text-card-foreground/90 mb-6 leading-relaxed">
                                     {member.description}
                                 </p>
-                                <div className="space-y-1">
+                                <div className="space-y-2">
                                     {member.responsibilities.map((resp, idx) => (
-                                        <div key={idx} className="text-xs text-muted-foreground">
-                                            • {resp}
+                                        <div
+                                            key={idx}
+                                            className="text-xs text-muted-foreground/70 flex items-center gap-2"
+                                        >
+                                            <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
+                                            {resp}
                                         </div>
                                     ))}
                                 </div>

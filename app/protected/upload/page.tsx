@@ -9,6 +9,7 @@ import { Progress } from '@/components/ui/progress';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { getPresignedUrl, checkModeration } from '@/utils/genUrl';
+import { createClient } from '@/utils/supabase/client';
 
 export default function UploadPage() {
     const [file, setFile] = React.useState(null);
@@ -78,6 +79,12 @@ export default function UploadPage() {
             if (moderation.error) throw new Error(moderation.error);
 
             setModerationResults(moderation.results);
+            const supabase = createClient();
+            const { data, error } = await supabase
+                .from("images")
+                .insert({ url: key, status: "done", result: moderation.results })
+                .select("*")
+            console.log(data, error);
 
         } catch (err) {
             setError(err.message);
@@ -218,6 +225,7 @@ export default function UploadPage() {
                             Reset
                         </Button>
                         <Button
+                            className='text-white font-bold'
                             onClick={handleUpload}
                             disabled={!file || uploading}
                         >
