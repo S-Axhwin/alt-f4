@@ -177,7 +177,7 @@ const Hero = () => {
                             whileTap={{ scale: 0.95 }}
                         >
                             <Button size="lg" className="group" asChild>
-                                <Link href="/login">
+                                <Link href="/sign-in">
                                     Get Started
                                     <motion.div
                                         className="ml-2"

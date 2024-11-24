@@ -4,9 +4,9 @@ import { Shield, Lock, Zap, Users } from "lucide-react";
 
 export default function Index() {
     const stats = [
-        { label: "Active Users", value: "10K+", icon: Users },
-        { label: "Images Processed", value: "1M+", icon: Zap },
-        { label: "Success Rate", value: "99.9%", icon: Shield },
+        { label: "Active Users", value: "100+", icon: Users },
+        { label: "Images Processed", value: "100+", icon: Zap },
+        { label: "Success Rate", value: "95%", icon: Shield },
         { label: "Data Protected", value: "100%", icon: Lock },
     ];
 
