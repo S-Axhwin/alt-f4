@@ -2,10 +2,10 @@
 "use client"
 
 import React from 'react';
-import { Shield, Code, Layout, Database, Zap, Github, Linkedin, Mail } from 'lucide-react';
+import { Shield, Code, Layout, Database, Zap, Github, Linkedin, Mail, LinkedinIcon, } from 'lucide-react';
+import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { motion } from "framer-motion";
 
 // Animation variants
@@ -48,28 +48,33 @@ const teamMembers = [
         role: "Full Stack Developer",
         description: "Leads the development of both frontend and backend systems, integrating AI services and managing database architecture.",
         icon: <Code className="w-6 h-6" />,
-        responsibilities: ["API Integration", "Database Design", "Authentication", "Backend Services"]
+        responsibilities: ["API Integration", "Database Design", "Authentication", "Backend Services"],
+        linkedInUrl: "https://www.linkedin.com/in/ashwinsathiya/"
     },
     {
         name: "Yugha",
         role: "Frontend Developer",
         description: "Crafts responsive and intuitive user interfaces, implementing real-time upload feedback and moderation results display.",
         icon: <Layout className="w-6 h-6" />,
-        responsibilities: ["User Interface", "Responsive Design", "State Management", "Performance Optimization"]
+        responsibilities: ["User Interface", "Responsive Design", "State Management", "Performance Optimization"],
+        linkedInUrl: "https://www.linkedin.com/in/yugha-s-606768293/"
     },
     {
         name: "Udit",
         role: "UI/UX Developer",
         description: "Designs user-friendly interfaces and experiences, ensuring smooth content moderation workflows and clear result visualization.",
         icon: <Zap className="w-6 h-6" />,
-        responsibilities: ["User Experience", "Interface Design", "Interaction Flows", "Visual Design"]
+        responsibilities: ["User Experience", "Interface Design", "Interaction Flows", "Visual Design"],
+        linkedInUrl: "https://www.linkedin.com/in/udit1105/"
+
     },
     {
         name: "Arshia",
         role: "System Design",
         description: "Architects the overall system structure, ensuring scalability and efficient processing of image moderation requests.",
         icon: <Database className="w-6 h-6" />,
-        responsibilities: ["System Architecture", "Scalability", "Performance", "Technical Documentation"]
+        responsibilities: ["System Architecture", "Scalability", "Performance", "Technical Documentation"],
+        linkedInUrl: "https://www.linkedin.com/in/arshia05/"
     }
 ];
 
@@ -231,8 +236,16 @@ export default function AboutPage() {
                                         className: "w-6 h-6 text-primary"
                                     })}
                                 </motion.div>
-                                <CardTitle>{member.name}</CardTitle>
-                                <CardDescription>{member.role}</CardDescription>
+                                <CardTitle className="flex items-center gap-2">
+                                    {member.name}
+                                    <Link href={member.linkedInUrl}>
+                                        <LinkedinIcon
+                                            size={20}
+                                            className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors duration-200"
+                                        />
+                                    </Link>
+                                </CardTitle>
+                                <CardDescription className='flex '>{member.role} </CardDescription>
                             </CardHeader>
                             <CardContent>
                                 <p className="text-sm text-card-foreground mb-4">
