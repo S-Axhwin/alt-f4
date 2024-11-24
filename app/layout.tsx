@@ -1,9 +1,7 @@
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
-import Link from "next/link";
 import "./globals.css";
 import { Home, Upload, Settings, Info } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import Navbar from "@/components/Nav";

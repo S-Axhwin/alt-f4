@@ -1,7 +1,10 @@
 # Alt F4
 **Safe Content Management Made Simple.**
+![Mockup Image](mockup.jpg)
+
 
 ## Overview
+![Mockup Image](mockup1.jpg)
 Protect your platform with our advanced AI-powered image moderation system. Upload, analyze, and manage content with confidence.
 
 ## System Architecture
@@ -59,6 +62,7 @@ sequenceDiagram
     Frontend-->>User: Show Results
 ```
 
+![Mockup Image](mockup2.jpg)
 ## Directory Structure
 ```
 alt-f4/
