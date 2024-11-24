@@ -4,74 +4,90 @@
 
 @layer base {
     :root {
-      --background: 36 33% 97%;
-      --foreground: 222.2 84% 4.9%;
-      --card: 36 33% 97%;
-      --card-foreground: 222.2 84% 4.9%;
-      --popover: 36 33% 97%;
-      --popover-foreground: 222.2 84% 4.9%;
+      /* Light Theme */
+      --background: 0 0% 100%;          /* White */
+      --foreground: 220 13% 10%;        /* Almost black */
+      --card: 0 0% 98%;                 /* Slightly off-white */
+      --card-foreground: 220 13% 10%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 220 13% 10%;
 
-      --primary: 42 79% 64%;
+      /* Discord Blurple */
+      --primary: 235 86% 65%;           /* #5865F2 */
       --primary-foreground: 0 0% 100%;
 
-      --secondary: 28 96% 65%;
-      --secondary-foreground: 222.2 47.4% 11.2%;
+      /* Light gray for secondary */
+      --secondary: 220 13% 95%;         /* #E3E5E8 */
+      --secondary-foreground: 220 13% 10%;
 
-      --muted: 36 33% 93%;
-      --muted-foreground: 215.4 16.3% 46.9%;
+      /* Muted colors */
+      --muted: 220 13% 95%;            /* Discord's light muted */
+      --muted-foreground: 220 9% 46%;
 
-      --accent: 0 72% 58%;
-      --accent-foreground: 210 40% 98%;
+      /* Accent/Interactive elements */
+      --accent: 235 86% 65%;           /* Same as primary for consistency */
+      --accent-foreground: 0 0% 100%;
 
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 210 40% 98%;
-      --border: 36 33% 90%;
-      --input: 36 33% 90%;
-      --ring: 42 79% 64%;
-      --radius: 1rem;
+      /* Danger/Destructive */
+      --destructive: 359 87% 59%;      /* Discord's danger red */
+      --destructive-foreground: 0 0% 100%;
 
-      --chart-1: 36 33% 97%;
-      --chart-2: 42 79% 64%;
-      --chart-3: 28 96% 65%;
-      --chart-4: 0 72% 58%;
+      /* Borders and inputs */
+      --border: 220 13% 91%;
+      --input: 220 13% 91%;
+      --ring: 235 86% 65%;
+      --radius: 0.9rem;                /* Discord uses smaller radius */
 
+      /* Chart colors based on Discord's palette */
+      --chart-1: 235 86% 65%;          /* Blurple */
+      --chart-2: 235 86% 65%;          /* Lighter Blurple */
+      --chart-3: 359 87% 59%;          /* Red */
+      --chart-4: 120 63% 42%;          /* Green */
+      --chart-5: 47 93% 67%;           /* Yellow */
     }
 
     .dark {
-      --background: 28 30% 20%;
-      --foreground: 36 33% 97%;
-      --card: 28 30% 20%;
-      --card-foreground: 36 33% 97%;
-      --popover: 28 30% 20%;
-      --popover-foreground: 36 33% 97%;
+      /* Dark Theme - Discord's actual dark theme colors */
+      --background: 223 7% 21%;        /* #313338 - Discord dark */
+      --foreground: 210 9% 91%;        /* Light text */
+      --card: 223 7% 21%;             /* Same as background */
+      --card-foreground: 210 9% 91%;
+      --popover: 225 6% 13%;          /* #1E1F22 - Darker shade */
+      --popover-foreground: 210 9% 91%;
 
-      --primary: 42 65% 54%;
-      --primary-foreground: 36 33% 97%;
+      /* Primary - Discord Blurple */
+      --primary: 235 86% 65%;         /* #5865F2 */
+      --primary-foreground: 0 0% 100%;
 
-      --secondary: 28 76% 55%;
-      --secondary-foreground: 36 33% 97%;
+      /* Secondary - Dark gray */
+      --secondary: 223 7% 16%;       /* #2B2D31 */
+      --secondary-foreground: 210 9% 91%;
 
-      --muted: 28 30% 30%;
-      --muted-foreground: 36 33% 87%;
+      /* Muted elements */
+      --muted: 225 6% 13%;          /* #1E1F22 */
+      --muted-foreground: 215 9% 65%;
 
-      --accent: 0 62% 48%;
-      --accent-foreground: 36 33% 97%;
+      /* Accent colors */
+      --accent: 235 86% 65%;        /* Blurple */
+      --accent-foreground: 0 0% 100%;
 
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 36 33% 97%;
-      --border: 28 30% 30%;
-      --input: 28 30% 30%;
-      --ring: 42 65% 54%;
+      /* Destructive actions */
+      --destructive: 359 87% 59%;   /* Discord red */
+      --destructive-foreground: 0 0% 100%;
 
+      /* System elements */
+      --border: 223 7% 16%;        /* Dark borders */
+      --input: 223 7% 16%;
+      --ring: 235 86% 65%;
 
-      --chart-1: 36 33% 87%;
-      --chart-2: 42 65% 54%;
-      --chart-3: 28 76% 55%;
-      --chart-4: 0 62% 48%;
-      --chart-5: 28 30% 40%;
+      /* Chart colors for dark theme */
+      --chart-1: 235 86% 65%;      /* Blurple */
+      --chart-2: 235 86% 65%;      /* Lighter Blurple */
+      --chart-3: 359 87% 59%;      /* Red */
+      --chart-4: 120 63% 42%;      /* Green */
+      --chart-5: 47 93% 67%;       /* Yellow */
     }
   }
-
   @layer base {
   * {
     @apply border-border;
