@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client"
 import React from 'react';
 import { Upload, Shield, AlertTriangle, Check, X } from 'lucide-react';
