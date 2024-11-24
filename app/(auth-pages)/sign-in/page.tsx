@@ -1,14 +1,14 @@
 // app/login/page.tsx
 "use client"
 
-import { SubmitButton } from "@/components/submit-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { createClient } from '@/utils/supabase/client';
 import { Chrome } from "lucide-react";
 import { useRouter } from 'next/navigation';
 
-const SignInPage = () => {
+
+export default () => {
     const router = useRouter();
     const supabase = createClient();
 
@@ -28,8 +28,8 @@ const SignInPage = () => {
     };
 
     return (
-        <div className="flex min-h-[calc(100vh-3.5rem)] items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <Card className="w-full max-w-sm">
+        <div className="flex min-h-screen items-center justify-center">
+            <Card className="w-full max-w-sm mx-auto">
                 <CardHeader className="space-y-1">
                     <CardTitle className="text-2xl font-bold">Sign in</CardTitle>
                     <CardDescription>
@@ -51,7 +51,7 @@ const SignInPage = () => {
                 <CardFooter className="flex flex-wrap items-center justify-center gap-2">
                     <div className="text-sm text-muted-foreground">
                         Don&apos;t have an account?{' '}
-                        <Button variant="link" className="p-0" onClick={() => router.push('/register')}>
+                        <Button variant="link" className="p-0" onClick={() => router.push('/protected/sign-in')}>
                             Sign up
                         </Button>
                     </div>
@@ -60,5 +60,3 @@ const SignInPage = () => {
         </div>
     );
 };
-
-export default SignInPage;
