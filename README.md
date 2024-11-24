@@ -3,8 +3,16 @@
 
 
 ## Overview
-
 Protect your platform with our advanced AI-powered image moderation system. Upload, analyze, and manage content with confidence.
+
+
+## Demo Images
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+  <img src="mockup1.png" alt="Mockup Features" style="height: 40vh; object-fit: contain;"/>
+  <img src="mockup2.png" alt="Mockup Interface" style="height: 40vh; object-fit: contain;"/>
+  <img src="mockup.jpg" alt="Mockup Overview" style="height: 40vh; object-fit: contain;"/>
+</div>
+
 
 ## System Architecture
 
@@ -62,12 +70,6 @@ sequenceDiagram
 ```
 
 
-## Overview
-<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
-  <img src="mockup1.png" alt="Mockup Features" style="height: 40vh; object-fit: contain;"/>
-  <img src="mockup2.png" alt="Mockup Interface" style="height: 40vh; object-fit: contain;"/>
-  <img src="mockup.jpg" alt="Mockup Overview" style="height: 40vh; object-fit: contain;"/>
-</div>
 
 Protect your platform with our advanced AI-powered image moderation system. Upload, analyze, and manage content with confidence.
 
