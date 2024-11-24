@@ -4,7 +4,7 @@
 
 
 ## Overview
-![Mockup Image](mockup1.jpg)
+![Mockup Image](mockup1.png)
 Protect your platform with our advanced AI-powered image moderation system. Upload, analyze, and manage content with confidence.
 
 ## System Architecture
@@ -62,7 +62,7 @@ sequenceDiagram
     Frontend-->>User: Show Results
 ```
 
-![Mockup Image](mockup2.jpg)
+![Mockup Image](mockup2.png)
 ## Directory Structure
 ```
 alt-f4/
