@@ -1,96 +1,173 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+# Alt F4
+**Safe Content Management Made Simple.**
 
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
+## Overview
+Protect your platform with our advanced AI-powered image moderation system. Upload, analyze, and manage content with confidence.
 
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
+## System Architecture
 
-## Features
+### Core Components
+```mermaid
+graph TD
+    A[Client/Frontend] --> B[Next.js API Routes]
+    B --> C[Supabase Auth]
+    B --> D[Image Processing]
+    D --> E[AWS S3]
+    D --> F[AWS Rekognition]
+    F --> G[Analysis Results]
+    G --> H[Supabase DB]
+    H --> A
+```
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Middleware
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Components with [shadcn/ui](https://ui.shadcn.com/)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+### Authentication Flow
+```mermaid
+sequenceDiagram
+    actor User
+    participant Frontend
+    participant Supabase
+    participant Protected Routes
 
-## Demo
+    User->>Frontend: Access Application
+    Frontend->>Supabase: Check Auth Status
+    alt Not Authenticated
+        Supabase->>Frontend: Redirect to Sign In
+        Frontend->>User: Show Auth UI
+    else Authenticated
+        Supabase->>Frontend: Session Token
+        Frontend->>Protected Routes: Access Granted
+    end
+```
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+### Image Moderation Flow
+```mermaid
+sequenceDiagram
+    actor User
+    participant Frontend
+    participant API Routes
+    participant S3
+    participant Rekognition
+    participant Database
 
-## Deploy to Vercel
+    User->>Frontend: Upload Image
+    Frontend->>API Routes: Submit Image
+    API Routes->>S3: Store Image
+    S3-->>API Routes: Image URL
+    API Routes->>Rekognition: Analyze Image
+    Rekognition-->>API Routes: Analysis Results
+    API Routes->>Database: Store Results
+    Database-->>Frontend: Updated Status
+    Frontend-->>User: Show Results
+```
 
-Vercel deployment will guide you through creating a Supabase account and project.
+## Directory Structure
+```
+alt-f4/
+├── app/
+│   ├── auth-pages/           # Authentication related pages
+│   │   ├── sign-in/
+│   │   ├── sign-up/
+│   │   └── forgot-password/
+│   ├── about/               # About page
+│   └── protected/           # Protected routes
+├── components/
+│   ├── ui/                 # UI components
+│   ├── typography/         # Typography components
+│   └── tutorial/           # Tutorial components
+├── lib/
+│   └── utils/             # Utility functions
+├── utils/
+│   └── supabase/          # Supabase client config
+```
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+## Tech Stack
+- [Next.js](https://nextjs.org/) - React Framework
+- [Bun](https://bun.sh/) - JavaScript Runtime
+- [Supabase](https://supabase.com/) - Backend as a Service
+- AWS Services:
+  - Amazon Rekognition - Image Analysis
+  - Amazon S3 - Image Storage
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
+## Key Features
+1. **Authentication**
+   - Secure user authentication via Supabase
+   - Protected routes and content
+   - Password recovery system
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+2. **Image Processing**
+   - Direct upload to AWS S3
+   - Real-time moderation via AWS Rekognition
+   - Result storage in Supabase
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+3. **User Interface**
+   - Responsive design
+   - Dark/Light mode support
+   - Real-time feedback
+   - Tutorial system
 
-## Clone and run locally
+## Prerequisites
+- Bun (Latest Version)
+- AWS Account with access to Rekognition and S3
+- Supabase Account
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
+## Setup
 
-2. Create a Next.js app using the Supabase Starter template npx command
+1. Clone the repository:
+```bash
+git clone [your-repository-url]
+cd alt-f4
+```
 
-   ```bash
-   npx create-next-app -e with-supabase
-   ```
+2. Install dependencies:
+```bash
+bun install
+```
 
-3. Use `cd` to change into the app's directory
+3. Configure environment variables:
+Create a `.env` file in the root directory with the following:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+AWS_ACCESS_KEY1=your_aws_access_key
+AWS_SECRET_KEY1=your_aws_secret_key
+AWS_REGION1=your_aws_region
+S3_BUCKET_NAME1=your_s3_bucket_name
+```
 
-   ```bash
-   cd name-of-new-app
-   ```
+## Development
 
-4. Rename `.env.example` to `.env.local` and update the following:
+Start the development server:
+```bash
+bun run dev
+```
 
-   ```
-   NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
-   ```
+## Build
 
-   Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
+Create a production build:
+```bash
+bun run build
+```
 
-5. You can now run the Next.js local development server:
+## AWS Services Setup
 
-   ```bash
-   npm run dev
-   ```
+1. Create an AWS account if you haven't already
+2. Enable Amazon Rekognition in your AWS Console
+3. Create an S3 bucket for image storage
+4. Create an IAM user with appropriate permissions for Rekognition and S3
+5. Generate access keys and add them to your environment variables
 
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
+## Supabase Setup
 
-6. This template comes with the default shadcn/ui style initialized. If you instead want other ui.shadcn styles, delete `components.json` and [re-install shadcn/ui](https://ui.shadcn.com/docs/installation/next)
+1. Create a new Supabase project
+2. Get your project URL and anon key from the project settings
+3. Add them to your environment variables
 
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
+## Team
 
-## Feedback and issues
+- Ashwin - Full Stack Developer
+- Yugha - Frontend Developer
+- Udit - UI/UX Developer
+- Arshia - System Design
 
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
+## License
 
-## More Supabase examples
-
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+[Your chosen license]

@@ -4,31 +4,25 @@
 
 @layer base {
     :root {
-      /* Core interface colors */
-      --background: 36 33% 97%;  /* Cream - Creates comfort and stability */
+      --background: 36 33% 97%;
       --foreground: 222.2 84% 4.9%;
       --card: 36 33% 97%;
       --card-foreground: 222.2 84% 4.9%;
       --popover: 36 33% 97%;
       --popover-foreground: 222.2 84% 4.9%;
 
-      /* Golden yellow - Optimism and clarity */
       --primary: 42 79% 64%;
       --primary-foreground: 0 0% 100%;
 
-      /* Warm orange - Creativity and enthusiasm */
       --secondary: 28 96% 65%;
       --secondary-foreground: 222.2 47.4% 11.2%;
 
-      /* Softer cream - Nurturing and calm */
       --muted: 36 33% 93%;
       --muted-foreground: 215.4 16.3% 46.9%;
 
-      /* Energetic red - Action and importance */
       --accent: 0 72% 58%;
       --accent-foreground: 210 40% 98%;
 
-      /* System colors */
       --destructive: 0 84.2% 60.2%;
       --destructive-foreground: 210 40% 98%;
       --border: 36 33% 90%;
@@ -36,16 +30,14 @@
       --ring: 42 79% 64%;
       --radius: 1rem;
 
-      /* Chart colors based on psychological impact */
-      --chart-1: 36 33% 97%;   /* Cream - Foundation */
-      --chart-2: 42 79% 64%;   /* Golden - Growth */
-      --chart-3: 28 96% 65%;   /* Orange - Progress */
-      --chart-4: 0 72% 58%;    /* Red - Achievement */
-      --chart-5: 36 40% 85%;   /* Subtle cream - Support */
+      --chart-1: 36 33% 97%;
+      --chart-2: 42 79% 64%;
+      --chart-3: 28 96% 65%;
+      --chart-4: 0 72% 58%;
+
     }
 
     .dark {
-      /* Dark theme adjustments for optimal psychological impact */
       --background: 28 30% 20%;
       --foreground: 36 33% 97%;
       --card: 28 30% 20%;
@@ -53,7 +45,6 @@
       --popover: 28 30% 20%;
       --popover-foreground: 36 33% 97%;
 
-      /* Warmer and deeper versions for dark mode */
       --primary: 42 65% 54%;
       --primary-foreground: 36 33% 97%;
 
@@ -66,14 +57,13 @@
       --accent: 0 62% 48%;
       --accent-foreground: 36 33% 97%;
 
-      /* System colors adjusted for dark mode */
       --destructive: 0 62.8% 30.6%;
       --destructive-foreground: 36 33% 97%;
       --border: 28 30% 30%;
       --input: 28 30% 30%;
       --ring: 42 65% 54%;
 
-      /* Dark mode chart colors */
+
       --chart-1: 36 33% 87%;
       --chart-2: 42 65% 54%;
       --chart-3: 28 76% 55%;
