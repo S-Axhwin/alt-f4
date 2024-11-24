@@ -17,6 +17,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { revalidatePath } from "next/cache";
+import { signOutAction } from "@/app/actions";
 
 // Navigation items for authenticated users
 const authenticatedItems = [
@@ -198,10 +199,7 @@ const Navbar = () => {
                                         <Button
                                             variant="ghost"
                                             onClick={async () => {
-                                                await supabase.auth.signOut();
-                                                router.refresh();
-                                                revalidatePath("/protected")
-                                                router.push('/');
+                                                signOutAction();
                                             }}
                                             className="justify-start"
                                         >
