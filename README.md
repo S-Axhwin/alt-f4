@@ -4,7 +4,9 @@
 
 
 ## Overview
-![Mockup Image](mockup1.png){ height="500" }
+![Mockup Image](mockup1.png){ height="200" }
+
+
 Protect your platform with our advanced AI-powered image moderation system. Upload, analyze, and manage content with confidence.
 
 ## System Architecture
