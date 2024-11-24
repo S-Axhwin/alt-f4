@@ -1,11 +1,8 @@
 # Alt F4
 **Safe Content Management Made Simple.**
-![Mockup Image](mockup.jpg)
 
 
 ## Overview
-![Mockup Image](mockup1.png){ height="200" }
-
 
 Protect your platform with our advanced AI-powered image moderation system. Upload, analyze, and manage content with confidence.
 
@@ -64,7 +61,17 @@ sequenceDiagram
     Frontend-->>User: Show Results
 ```
 
-![Mockup Image](mockup2.png)
+
+## Overview
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+  <img src="mockup.jpg" alt="Mockup Overview" style="height: 40vh; object-fit: contain;"/>
+  <img src="mockup1.png" alt="Mockup Features" style="height: 40vh; object-fit: contain;"/>
+  <img src="mockup2.png" alt="Mockup Interface" style="height: 40vh; object-fit: contain;"/>
+</div>
+
+Protect your platform with our advanced AI-powered image moderation system. Upload, analyze, and manage content with confidence.
+
+
 ## Directory Structure
 ```
 alt-f4/
