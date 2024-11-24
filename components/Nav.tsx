@@ -188,7 +188,7 @@ const Navbar = () => {
                                 {isAuthenticated ? (
                                     <div className="flex flex-col space-y-2">
                                         <Link
-                                            href="/protected/settings"
+                                            href="/protected"
                                             className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary"
                                         >
                                             <Settings className="h-4 w-4" />
@@ -210,13 +210,13 @@ const Navbar = () => {
                                 ) : (
                                     <div className="flex flex-col space-y-2">
                                         <Button variant="ghost" asChild>
-                                            <Link href="/login" className="flex items-center">
+                                            <Link href="/protected/sign-in" className="flex items-center">
                                                 <LogIn className="mr-2 h-4 w-4" />
                                                 Sign In
                                             </Link>
                                         </Button>
                                         <Button asChild>
-                                            <Link href="/register">Sign Up</Link>
+                                            <Link href="/protected/sign-in">Sign Up</Link>
                                         </Button>
                                     </div>
                                 )}
