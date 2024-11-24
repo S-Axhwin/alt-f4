@@ -202,6 +202,3 @@ Our diverse team brings together expertise in full-stack development, UI/UX desi
 |----------|------|
 | GitHub | [Project Repository](http://github.com/S-Axhwin) |
 | LinkedIn | [Ashwin](https://www.linkedin.com/in/ashwinsathiya/) |
-## License
-
-[Your chosen license]
