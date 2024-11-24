@@ -29,18 +29,18 @@ type ModerationResponse = {
 
 // Initialize AWS clients
 const s3Client = new S3Client({
-    region: process.env.AWS_REGION || "us-east-1",
+    region: process.env.AWS_REGION1 || "us-east-1",
     credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY!,
-        secretAccessKey: process.env.AWS_SECRET_KEY!
+        accessKeyId: process.env.AWS_ACCESS_KEY1!,
+        secretAccessKey: process.env.AWS_SECRET_KEY1!
     }
 });
 
 const rekognitionClient = new RekognitionClient({
     region: process.env.AWS_REGION || "us-east-1",
     credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY!,
-        secretAccessKey: process.env.AWS_SECRET_KEY!
+        accessKeyId: process.env.AWS_ACCESS_KEY1!,
+        secretAccessKey: process.env.AWS_SECRET_KEY1!
     }
 });
 
