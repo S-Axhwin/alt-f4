@@ -118,6 +118,46 @@ const socialLinks = [
     }
 ];
 
+
+// Updated Pricing data
+const pricingPlans = [
+    {
+        title: "Trial Plan",
+        price: "Free",
+        originalPrice: null,
+        features: [
+            "Upload up to 5 images",
+            "Basic image moderation",
+            "Limited AI analysis"
+        ],
+        buttonText: "Current Plan"
+    },
+    {
+        title: "Basic Plan",
+        price: "₹299/month",
+        originalPrice: "₹399",
+        features: [
+            "10 images per day",
+            "Standard image moderation",
+            "Detailed content analysis",
+            "Basic support"
+        ],
+        buttonText: "Choose Basic"
+    },
+    {
+        title: "Pro Plan",
+        price: "₹499/month",
+        originalPrice: "₹599",
+        features: [
+            "100 images per day",
+            "Advanced AI moderation",
+            "Comprehensive content insights",
+            "Priority support"
+        ],
+        buttonText: "Choose Pro"
+    }
+];
+
 export default function AboutPage() {
     return (
         <div className="min-h-screen bg-background">
@@ -207,6 +247,65 @@ export default function AboutPage() {
                 </div>
             </motion.div>
 
+            {/* Pricing */}
+            <motion.div
+                className="border-t"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+            >
+                <div className="container py-12">
+                    <motion.h2
+                        className="text-3xl font-bold text-center mb-8"
+                        variants={itemVariants}
+                    >
+                        Pricing
+                    </motion.h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                        {pricingPlans.map((plan, index) => (
+                            <MotionCard
+                                key={index}
+                                className={`bg-card ${index === 1 ? 'border-2 border-primary' : ''}`}
+                                variants={itemVariants}
+                                whileHover={{ scale: 1.05 }}
+                                transition={{ type: "spring", stiffness: 300 }}
+                            >
+                                <CardHeader>
+                                    <CardTitle className="text-xl">{plan.title}</CardTitle>
+                                    <CardDescription className="text-2xl font-bold text-foreground">
+                                        {plan.price}
+                                        {plan.originalPrice && (
+                                            <span className="ml-2 text-sm line-through text-muted-foreground">
+                                                {plan.originalPrice}
+                                            </span>
+                                        )}
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <ul className="space-y-3 mb-6">
+                                        {plan.features.map((feature, featureIndex) => (
+                                            <li
+                                                key={featureIndex}
+                                                className="flex items-center gap-2 text-muted-foreground"
+                                            >
+                                                <span className="w-2 h-2 bg-primary rounded-full" />
+                                                {feature}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <Button
+                                        variant={index === 0 ? "outline" : index === 1 ? "default" : "secondary"}
+                                        className="w-full"
+                                    >
+                                        {plan.buttonText}
+                                    </Button>
+                                </CardContent>
+                            </MotionCard>
+                        ))}
+                    </div>
+                </div>
+            </motion.div>
             {/* Team Section */}
             <motion.div
                 className="container py-12"

@@ -230,7 +230,7 @@ const WelcomePage: React.FC = () => {
                     <div className="flex items-center justify-between">
                         <div>
                             <CardTitle>Recent Activity</CardTitle>
-                            <CardDescription>Your latest moderation results</CardDescription>
+                            <CardDescription>Your latest moderation results <span className="text-xs text-red-300">can view only for 24h</span></CardDescription>
                         </div>
                         <div className="flex gap-2">
                             <Button
@@ -242,7 +242,7 @@ const WelcomePage: React.FC = () => {
                                 Refresh
                             </Button>
                             <Link href="/protected/history">
-                                <Button variant="outline" size="sm">
+                                <Button variant="default" size="sm">
                                     View All
                                 </Button>
                             </Link>
