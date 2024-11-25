@@ -106,7 +106,7 @@ const UserMenu = () => {
                         <span>Settings</span>
                     </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleSignOut}>
+                <DropdownMenuItem onClick={signOutAction}>
                     <LogOut className="mr-2 h-4 w-4" />
                     <span>Sign out</span>
                 </DropdownMenuItem>
