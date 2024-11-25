@@ -32,7 +32,11 @@ const publicItems = [
     { name: 'About', href: '/about', icon: Info },
 ];
 
-function NavItems({ className, isAuthenticated }: { className?: string, isAuthenticated: boolean }) {
+function NavItems({ className, isAuthenticated, onItemClick }: {
+    className?: string,
+    isAuthenticated: boolean,
+    onItemClick?: () => void
+}) {
     const items = isAuthenticated ? authenticatedItems : publicItems;
 
     return (
@@ -44,6 +48,7 @@ function NavItems({ className, isAuthenticated }: { className?: string, isAuthen
                         key={item.name}
                         href={item.href}
                         className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary"
+                        onClick={onItemClick}
                     >
                         <IconComponent className="h-4 w-4" />
                         <span>{item.name}</span>
@@ -110,17 +115,21 @@ const UserMenu = () => {
     );
 };
 
-const AuthButtons = () => {
+const AuthButtons = ({ setIsOpen }: { setIsOpen: (value: boolean) => void }) => {
+    const handleClick = () => {
+        setIsOpen(false);
+    };
+
     return (
         <div className="flex items-center gap-4">
             <Button variant="ghost" asChild>
-                <Link href="/sign-in" className="flex items-center">
+                <Link href="/sign-in" className="flex items-center" onClick={handleClick}>
                     <LogIn className="mr-2 h-4 w-4" />
                     Sign In
                 </Link>
             </Button>
             <Button asChild>
-                <Link href="/sign-in">
+                <Link href="/sign-in" onClick={handleClick}>
                     Sign Up
                 </Link>
             </Button>
@@ -153,6 +162,10 @@ const Navbar = () => {
         };
     }, [supabase.auth]);
 
+    const handleCloseSheet = () => {
+        setIsOpen(false);
+    };
+
     return (
         <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container flex h-14 items-center">
@@ -168,7 +181,7 @@ const Navbar = () => {
                     {isAuthenticated ? (
                         <UserMenu />
                     ) : (
-                        <AuthButtons />
+                        <AuthButtons setIsOpen={setIsOpen} />
                     )}
                 </div>
 
@@ -181,17 +194,22 @@ const Navbar = () => {
                                 <span className="sr-only">Toggle navigation menu</span>
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side="right">
+                        <SheetContent side="bottom">
                             <SheetHeader>
                                 <SheetTitle>Navigation Menu</SheetTitle>
                             </SheetHeader>
                             <div className="flex flex-col space-y-4 mt-4">
-                                <NavItems className="flex-col items-start" isAuthenticated={isAuthenticated} />
+                                <NavItems
+                                    className="flex-col items-start"
+                                    isAuthenticated={isAuthenticated}
+                                    onItemClick={handleCloseSheet}
+                                />
                                 {isAuthenticated ? (
                                     <div className="flex flex-col space-y-2">
                                         <Link
                                             href="/protected"
                                             className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary"
+                                            onClick={handleCloseSheet}
                                         >
                                             <Settings className="h-4 w-4" />
                                             <span>Settings</span>
@@ -199,7 +217,8 @@ const Navbar = () => {
                                         <Button
                                             variant="ghost"
                                             onClick={async () => {
-                                                signOutAction();
+                                                handleCloseSheet();
+                                                await signOutAction();
                                             }}
                                             className="justify-start"
                                         >
@@ -210,13 +229,22 @@ const Navbar = () => {
                                 ) : (
                                     <div className="flex flex-col space-y-2">
                                         <Button variant="ghost" asChild>
-                                            <Link href="/protected/sign-in" className="flex items-center">
+                                            <Link
+                                                href="/protected/sign-in"
+                                                className="flex items-center"
+                                                onClick={handleCloseSheet}
+                                            >
                                                 <LogIn className="mr-2 h-4 w-4" />
                                                 Sign In
                                             </Link>
                                         </Button>
                                         <Button asChild>
-                                            <Link href="/protected/sign-in">Sign Up</Link>
+                                            <Link
+                                                href="/protected/sign-in"
+                                                onClick={handleCloseSheet}
+                                            >
+                                                Sign Up
+                                            </Link>
                                         </Button>
                                     </div>
                                 )}
