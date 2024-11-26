@@ -1,5 +1,7 @@
 import { Toaster } from "@/components/ui/toaster"
 import { GeistSans } from "geist/font/sans";
+
+import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Home, Upload, Settings, Info } from "lucide-react";
@@ -40,7 +42,7 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    
+
                     <main className="min-h-screen flex flex-col">
                         <Navbar />
                         <div className="flex-1">
@@ -60,6 +62,7 @@ export default function RootLayout({
                     </main>
                     <Toaster />
                 </ThemeProvider>
+                <Analytics />
             </body>
         </html>
     );
