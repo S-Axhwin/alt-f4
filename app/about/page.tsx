@@ -1,4 +1,3 @@
-// app/about/page.tsx
 "use client"
 
 import React from 'react';
@@ -9,7 +8,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
-// Animation variants
 const containerVariants = {
     hidden: {
         opacity: 0,
@@ -39,19 +37,10 @@ const itemVariants = {
     }
 };
 
-// Wrap Card with motion
 const MotionCard = motion(Card);
 
-// Team members data
 const teamMembers = [
-    {
-        name: "Ashwin",
-        role: "Full Stack Developer",
-        description: "Leads the development of both frontend and backend systems, integrating AI services and managing database architecture.",
-        icon: <Code className="w-6 h-6" />,
-        responsibilities: ["API Integration", "Database Design", "Authentication", "Backend Services"],
-        linkedInUrl: "https://www.linkedin.com/in/ashwinsathiya/"
-    },
+
     {
         name: "Yugha",
         role: "Frontend Developer",
@@ -59,6 +48,14 @@ const teamMembers = [
         icon: <Layout className="w-6 h-6" />,
         responsibilities: ["User Interface", "Responsive Design", "State Management", "Performance Optimization"],
         linkedInUrl: "https://www.linkedin.com/in/yugha-s-606768293/"
+    },
+    {
+        name: "Ashwin Sathiya",
+        role: "Full Stack Developer",
+        description: "Leads the development of both frontend and backend systems, integrating AI services and managing database architecture.",
+        icon: <Code className="w-6 h-6" />,
+        responsibilities: ["API Integration", "Database Design", "Authentication", "Backend Services"],
+        linkedInUrl: "https://www.linkedin.com/in/ashwinsathiya/"
     },
     {
         name: "Udit",
@@ -79,7 +76,6 @@ const teamMembers = [
     }
 ];
 
-// Tech stack data
 const techStack = [
     {
         title: "Frontend",
@@ -99,7 +95,6 @@ const techStack = [
     }
 ];
 
-// Social links data
 const socialLinks = [
     {
         icon: <FaGithub />,
@@ -119,7 +114,6 @@ const socialLinks = [
 ];
 
 
-// Updated Pricing data
 const pricingPlans = [
     {
         title: "Trial Plan",

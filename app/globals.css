@@ -76,4 +76,13 @@
   body {
     @apply bg-background text-foreground;
   }
+  @font-face {
+    font-family: 'Bangers';
+    src: url('../fonts/Spectral/Spectral-Bold.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+}
+.testFont {
+    font-family: 'Bangers', sans-serif;
 }

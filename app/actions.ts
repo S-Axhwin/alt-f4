@@ -118,7 +118,6 @@ export const resetPasswordAction = async (formData: FormData) => {
 export const signOutAction = async () => {
     const supabase = await createClient();
     await supabase.auth.signOut();
-    await supabase.auth.startAutoRefresh()
-
+    revalidatePath("/protected")
     return redirect("/sign-in");
 };

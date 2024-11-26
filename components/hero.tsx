@@ -138,13 +138,14 @@ const Hero = () => {
 
                     {/* Heading with typing effect */}
                     <motion.h1
-                        className="text-4xl sm:text-6xl font-bold tracking-tight"
+                        className="text-4xl sm:text-6xl font-bold tracking-tight testFont"
                         variants={itemVariants}
                     >
                         <motion.span
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.5, duration: 0.5 }}
+
                         >
                             Safe Content Management
                         </motion.span>

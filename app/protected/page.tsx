@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Activity, Upload, Settings, Clock, AlertTriangle, CheckCircle } from "lucide-react";
+import { Activity, Upload, Settings, Clock, AlertTriangle, CheckCircle, LucideRefreshCcw } from "lucide-react";
 import { useEffect, useState, useCallback } from 'react';
 import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
@@ -146,7 +146,7 @@ const WelcomePage: React.FC = () => {
     const quickActions: QuickAction[] = [
         { title: 'Upload Files', icon: Upload, href: '/protected/upload' },
         { title: 'Recent Activity', icon: Activity, href: '/protected/history' },
-        { title: 'Settings', icon: Settings, href: '/settings' },
+        { title: 'Settings', icon: Settings, href: '/protected/settings' },
     ];
 
     const getStatusBadge = (result: Detection[]): JSX.Element => {
@@ -230,16 +230,17 @@ const WelcomePage: React.FC = () => {
                     <div className="flex items-center justify-between">
                         <div>
                             <CardTitle>Recent Activity</CardTitle>
-                            <CardDescription>Your latest moderation results <span className="text-xs text-red-300">can view only for 24h</span></CardDescription>
+                            <CardDescription className="hidden md:block">Your latest moderation results <span className="text-xs text-red-300">can view be only for 2min</span></CardDescription>
                         </div>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 ">
                             <Button
-                                variant="outline"
+                                variant="ghost"
                                 size="sm"
+                                className="hover:bg-transparent "
                                 onClick={handleRefresh}
                                 disabled={isLoading}
                             >
-                                Refresh
+                                <LucideRefreshCcw />
                             </Button>
                             <Link href="/protected/history">
                                 <Button variant="default" size="sm">
@@ -266,18 +267,16 @@ const WelcomePage: React.FC = () => {
                         <div className="space-y-4">
                             {recentActivities.map((activity) => (
                                 <div key={activity.id} className="flex items-start space-x-4 p-4 rounded-lg hover:bg-muted/50 transition-colors">
-                                    <div className="w-12 h-12 rounded overflow-hidden flex-shrink-0">
+                                    <div className="flex-shrink-0 w-12 h-12 rounded overflow-hidden">
                                         <img
-                                            src={`https://image-reco.s3.ap-southeast-2.amazonaws.com/${activity.url}`}
+                                            src={activity.result.length == 0 ? `https://image-reco.s3.ap-southeast-2.amazonaws.com/${activity.url}` : "https://cdn.pixabay.com/photo/2016/10/09/17/28/censored-1726364_1280.jpg"}
                                             alt="Uploaded content"
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
                                     <div className="flex-1 space-y-1">
                                         <div className="flex items-center justify-between">
-                                            <p className="text-sm font-medium">
-                                                {activity.url.split('/').pop()}
-                                            </p>
+                                            <p className="text-sm font-medium">{activity.url.split('/').pop()!.slice(0, 4)}</p>
                                             {getStatusBadge(activity.result)}
                                         </div>
                                         <p className="text-sm text-muted-foreground">

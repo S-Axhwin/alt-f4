@@ -33,13 +33,14 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" className={GeistSans.className} suppressHydrationWarning>
-            <body className="bg-background text-foreground">
+            <body className="bg-background text-foreground" suppressHydrationWarning>
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
                     enableSystem
                     disableTransitionOnChange
                 >
+                    
                     <main className="min-h-screen flex flex-col">
                         <Navbar />
                         <div className="flex-1">

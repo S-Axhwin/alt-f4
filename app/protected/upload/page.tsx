@@ -1,6 +1,5 @@
-// @ts-nocheck
 "use client"
-import React from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { useToast } from "@/hooks/use-toast"
 import { Upload, Shield, AlertTriangle, Check, X } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -13,16 +12,49 @@ import { getPresignedUrl, checkModeration } from '@/utils/genUrl';
 import { createClient } from '@/utils/supabase/client';
 
 export default function UploadPage() {
-    const [file, setFile] = React.useState(null);
+    const [file, setFile] = useState(null as any);
     const { toast } = useToast()
-    const [uploading, setUploading] = React.useState(false);
-    const [progress, setProgress] = React.useState(0);
-    const [uploadStatus, setUploadStatus] = React.useState('');
-    const [moderationResults, setModerationResults] = React.useState(null);
-    const [error, setError] = React.useState('');
-    const fileInputRef = React.useRef(null);
+    const [uploading, setUploading] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [uploadStatus, setUploadStatus] = useState('');
+    const [moderationResults, setModerationResults] = useState(null as any);
+    const [error, setError] = useState('');
+    const [isDragOver, setIsDragOver] = useState(false);
+    const fileInputRef = useRef(null as any);
 
-    const handleFileSelect = (e) => {
+    // Drag and Drop Handlers
+    const handleDragOver = useCallback((e: any) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragOver(true);
+    }, []);
+
+    const handleDragLeave = useCallback((e: any) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragOver(false);
+    }, []);
+
+    const handleDrop = useCallback((e: any) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragOver(false);
+
+        const droppedFiles = e.dataTransfer.files;
+        if (droppedFiles.length > 0) {
+            const selectedFile = droppedFiles[0];
+            if (selectedFile.type.startsWith('image/')) {
+                setFile(selectedFile);
+                setError('');
+                setModerationResults(null);
+            } else {
+                setError('Please select an image file');
+                setFile(null);
+            }
+        }
+    }, []);
+
+    const handleFileSelect = (e: any) => {
         const selectedFile = e.target.files[0];
         if (selectedFile) {
             if (selectedFile.type.startsWith('image/')) {
@@ -43,7 +75,7 @@ export default function UploadPage() {
             .from("images")
             .select("*")
 
-        if (data?.length > 5) {
+        if (data!?.length > 5) {
             toast({
                 title: "Limit reached",
                 description: "try contacting Developer👽",
@@ -56,8 +88,11 @@ export default function UploadPage() {
             setError('');
 
             // Get presigned URL
-            const { uploadUrl, key, error: urlError } = await getPresignedUrl(file.name);
-            if (urlError) throw new Error(urlError);
+            const { uploadUrl, key, error: urlError } = await getPresignedUrl(file.name) as any;
+            if (urlError) {
+                toast({ title: "error while uploading", description: urlError.message })
+                throw new Error(urlError)
+            };
 
             // Upload with progress
             const xhr = new XMLHttpRequest();
@@ -69,12 +104,12 @@ export default function UploadPage() {
             });
 
             await new Promise((resolve, reject) => {
-                xhr.open('PUT', uploadUrl);
+                xhr.open('PUT', uploadUrl!);
                 xhr.setRequestHeader('Content-Type', file.type);
 
                 xhr.onload = () => {
                     if (xhr.status === 200) {
-                        resolve();
+                        resolve(0);
                     } else {
                         reject(new Error('Upload failed'));
                     }
@@ -99,7 +134,7 @@ export default function UploadPage() {
                 .select("*")
             console.log(data, error);
 
-        } catch (err) {
+        } catch (err: any) {
             setError(err.message);
             setUploadStatus('error');
         } finally {
@@ -113,16 +148,22 @@ export default function UploadPage() {
         setUploadStatus('');
         setModerationResults(null);
         setError('');
+        setIsDragOver(false);
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
         }
     };
 
     return (
-        <div className="min-h-screen p-8">
+        <div
+            className="min-h-screen p-8"
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+        >
             <div className="mx-auto max-w-2xl">
                 <Card>
-                    <CardHeader>
+                    <CardHeader className={`${moderationResults?.length > 0 ? "text-red-500" : ""}`}>
                         <CardTitle className="flex items-center gap-2">
                             <Upload className="h-6 w-6" />
                             Image Upload & Moderation
@@ -151,20 +192,34 @@ export default function UploadPage() {
                                 id="file-upload"
                             />
 
-                            <div className="grid w-full place-items-center gap-1.5">
-                                <div className="flex w-full flex-col items-center justify-center rounded-lg border border-dashed border-gray-300 p-12">
+                            <div
+                                className={`grid w-full place-items-center gap-1.5
+                                    ${isDragOver ? 'border-blue-500 ' : ''}
+                                `}
+                            >
+                                <div
+                                    className={`flex w-full flex-col items-center justify-center rounded-lg border border-dashed
+                                        ${isDragOver
+                                            ? 'border-blue-500 bg-blue-50 text-blue-600'
+                                            : 'border-gray-300'}
+                                        p-12 cursor-pointer  transition`}
+                                    onClick={() => fileInputRef.current?.click()}
+                                >
                                     <div className="flex flex-col items-center justify-center text-center">
                                         {!file ? (
                                             <>
-                                                <Upload className="h-8 w-8 text-gray-400" />
+                                                <Upload className={`h-8 w-8 ${isDragOver ? 'text-blue-500' : 'text-gray-400'}`} />
                                                 <label
                                                     htmlFor="file-upload"
-                                                    className="mt-2 cursor-pointer text-sm font-medium text-blue-600 hover:text-blue-500"
+                                                    className={`mt-2 cursor-pointer text-sm font-medium
+                                                        ${isDragOver
+                                                            ? 'text-blue-700 hover:text-blue-800'
+                                                            : 'text-blue-600 hover:text-blue-500'}`}
                                                 >
-                                                    Choose a file
+                                                    {isDragOver ? 'Drop file here' : 'Choose a file'}
                                                 </label>
-                                                <p className="mt-1 text-xs text-gray-500">
-                                                    or drag and drop
+                                                <p className={`mt-1 text-xs ${isDragOver ? 'text-blue-500' : 'text-gray-500'}`}>
+                                                    {isDragOver ? 'or release to upload' : 'or drag and drop'}
                                                 </p>
                                             </>
                                         ) : (
@@ -207,17 +262,17 @@ export default function UploadPage() {
                                 </div>
                                 {moderationResults.length > 0 ? (
                                     <ScrollArea className="h-48">
-                                        {moderationResults.map((label, index) => (
+                                        {moderationResults.map((label: any, index: any) => (
                                             <div key={index} className="space-y-1 py-2">
                                                 <div className="flex justify-between">
                                                     <span className="font-medium">{label.Name}</span>
-                                                    <span className="text-sm text-gray-500">
-                                                        {label.Confidence.toFixed(2)}% confidence
-                                                    </span>
                                                 </div>
                                                 <Separator />
                                             </div>
                                         ))}
+                                        <span className="md:text-xl font-bold text-gray-300 flex justify-end">
+                                            {moderationResults[0].Confidence.toFixed(2)}% confidence
+                                        </span>
                                     </ScrollArea>
                                 ) : (
                                     <div className="py-2 text-green-600">

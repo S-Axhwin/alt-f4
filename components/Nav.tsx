@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 "use client"
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -68,19 +68,11 @@ const UserMenu = () => {
         const getUserEmail = async () => {
             const { data: { user }, error } = await supabase.auth.getUser();
             if (user) {
-                setUserEmail(user.email);
+                setUserEmail(user.email || "");
             }
         };
         getUserEmail();
     }, [supabase.auth]);
-
-    const handleSignOut = async () => {
-        const { error } = await supabase.auth.signOut();
-        if (!error) {
-            router.refresh();
-            router.push('/');
-        }
-    };
 
     return (
         <DropdownMenu>

@@ -36,7 +36,7 @@ const HistoryContent = ({ initialData }: any) => {
                     <Card key={item.id} className="overflow-hidden">
                         <div className="aspect-video relative">
                             <img
-                                src={`https://image-reco.s3.ap-southeast-2.amazonaws.com/${item.imageUrl}`}
+                                src={item.detections.length == 0 ? `https://image-reco.s3.ap-southeast-2.amazonaws.com/${item.imageUrl}` : "https://cdn.pixabay.com/photo/2016/10/09/17/28/censored-1726364_1280.jpg"}
                                 alt={`History item ${item.id}`}
                                 className="object-cover w-full h-full"
                             />
