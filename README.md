@@ -14,7 +14,7 @@ Protect your platform with our advanced AI-powered image moderation system. Uplo
 </div>
 
 
-## System Architecture
+## System Architecture.  
 
 ### Core Components
 ```mermaid
